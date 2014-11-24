@@ -1,52 +1,39 @@
-Heroku buildpack: Python
-========================
+Heroku buildpack: Python 3 with scikit-learn
+============================================
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python apps, powered by [pip](http://www.pip-installer.org/).
-
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for Python 3 apps with scikit-learn.
 
 Usage
 -----
 
-Example usage:
+We use [buildpack-multi](https://github.com/ddollar/heroku-buildpack-multi) and 
+[buildpack-apt](http://github.com/ddollar/heroku-buildpack-apt) to install the apt-packages 
+`python3-numpy` and `python3-scipy`.
 
-    $ ls
-    Procfile  requirements.txt  web.py
+Set your app's buildpack to use `buildpack-multi`:
 
-    $ heroku create --buildpack git://github.com/heroku/heroku-buildpack-python.git
+    $ heroku config:set BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
 
-    $ git push heroku master
-    ...
-    -----> Python app detected
-    -----> Installing runtime (python-2.7.8)
-    -----> Installing dependencies using pip
-           Downloading/unpacking requests (from -r requirements.txt (line 1))
-           Installing collected packages: requests
-           Successfully installed requests
-           Cleaning up...
-    -----> Discovering process types
-           Procfile declares types -> (none)
+Let `buildpack-multi` knows that you will need to use at least the two following buildpacks:
 
-You can also add it to upcoming builds of an existing application:
+    $ echo -e "https://github.com/ddollar/heroku-buildpack-apt\nhttps://github.com/dwnld/heroku-buildpack-python3-sklearn" > .buildpacks
 
-    $ heroku config:add BUILDPACK_URL=git://github.com/heroku/heroku-buildpack-python.git
+Create an [Aptfile](http://github.com/ddollar/heroku-buildpack-apt) in your project's root directory and add the following apt-packages:
 
-The buildpack will detect your app as Python if it has the file `requirements.txt` in the root.
+    python3-setuptools
+    python3-pip
+    python3-numpy
+    python3-scipy
+    libatlas-dev
+    libatlas3gf-base
 
-It will use Pip to install your dependencies, vendoring a copy of the Python runtime into your slug.
+Append scikit-learn to your `requirements.txt` if you haven't already done so:
 
-Specify a Runtime
------------------
+    echo "scikit-learn" >> requirements.txt
 
-You can also provide arbitrary releases Python with a `runtime.txt` file.
+That's it! You should now be able to use scikit-learn on heroku after deployment.
 
-    $ cat runtime.txt
-    python-3.4.2
+Python 2.7
+-----------
 
-Runtime options include:
-
-- python-2.7.8
-- python-3.4.2
-- pypy-2.4.0 (unsupported, experimental)
-- pypy3-2.3.1 (unsupported, experimental)
-
-Other [unsupported runtimes](https://github.com/heroku/heroku-buildpack-python/tree/master/builds/runtimes) are available as well.
+If you are using Python 2.7, I recommend that you use https://github.com/thenovices/heroku-buildpack-scipy
