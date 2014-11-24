@@ -31,6 +31,10 @@ Append scikit-learn to your `requirements.txt` if you haven't already done so:
 
     echo "scikit-learn" >> requirements.txt
 
+Add the new files to your repo:
+    
+    git add .buildpacks Aptfile requirements.txt
+
 That's it! You should now be able to use scikit-learn on heroku after deployment.
 
 Python 2.7
