@@ -152,7 +152,7 @@ PYTHON_EXE_DIR=.heroku/python/bin/
 mkdir -p $PYTHON_EXE_DIR
 ln -s /usr/bin/python3 $PYTHON_EXE_DIR/python || true
 ln -s /app/.apt/usr/bin/pip3 $PYTHON_EXE_DIR/pip || true
-pip3 install pip-pop --user
+pip install pip-pop --exists-action=w --src=./.heroku/src --allow-all-external --user
 
 # Sanity check for setuptools/distribute.
 source $BIN_DIR/steps/setuptools
