@@ -181,7 +181,6 @@ sub-env $BIN_DIR/steps/collectstatic
 # Set context environment variables.
 set-env PATH '$HOME/.heroku/python/bin:$PATH'
 set-env PYTHONUNBUFFERED true
-set-env PYTHONHOME /app/.heroku/python
 set-env LIBRARY_PATH /app/.heroku/vendor/lib:/app/.heroku/python/lib
 set-env LD_LIBRARY_PATH '/app/.apt/usr/lib/atlas-base/atlas:/app/.heroku/vendor/lib:/app/.heroku/python/lib:$LD_LIBRARY_PATH'
 set-env PYTHONPATH '/app/.apt/usr/lib/python3/dist-packages:/app/:$PYTHONPATH'
