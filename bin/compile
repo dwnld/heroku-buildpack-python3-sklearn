@@ -153,6 +153,9 @@ mkdir -p $PYTHON_EXE_DIR
 ln -s /usr/bin/python3 $PYTHON_EXE_DIR/python || true
 ln -s /app/.apt/usr/bin/pip3 $PYTHON_EXE_DIR/pip || true
 
+# Modify PYTHONPATH for pip-diff and pip-grep 
+export PYTHONPATH=/app/.apt/usr/lib/python3/dist-packages:$PYTHONPATH
+
 # Sanity check for setuptools/distribute.
 source $BIN_DIR/steps/setuptools
 
