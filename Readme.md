@@ -6,13 +6,13 @@ This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) fo
 Usage
 -----
 
-We use [buildpack-multi](https://github.com/ddollar/heroku-buildpack-multi) and 
+We use [buildpack-multi](https://github.com/heroku/heroku-buildpack-multi) and 
 [buildpack-apt](http://github.com/ddollar/heroku-buildpack-apt) to install the apt-packages 
 `python3-numpy` and `python3-scipy`.
 
 Set your app's buildpack to use `buildpack-multi`:
 
-    $ heroku config:set BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git
+    $ heroku config:set BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi.git
 
 Let `buildpack-multi` knows that you will need to use at least the two following buildpacks:
 
